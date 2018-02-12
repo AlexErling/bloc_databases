@@ -1,0 +1,33 @@
+1. A Clockwork Orange - string
+42 - integer
+09/02/1945 - date
+98.7 - float
+15.99 - currency
+
+2. A database could be used when there you are dealing with a large amount of information, and you want to be able to use queries to use, access, retrieve, and manipulate the information easily. A text file could be used when you are dealing with a large amount of information and don't need a full database to keep track of it all.
+ 
+3. The difference between SQL and other languages is that SQL is a declarative language that works primarily in databases (establish desires results), while other languages (ex. procedural, object oriented ) have different processes and steps when obtaining the information (attempt to control the flow of the program through procedures). 
+
+4. A database system is an application that allows users to manage data through an interface, storing the information in tables using rows, columns, and values. The database (stored in a binary format), allows for the user to access and manipulate the information. This is highly useful when dealing with large sets of data, because it makes it easier to use the data effectively.
+
+5. A table is a set of data elements (values) using a model of vertical columns (specified number of columns) and horizontal rows (unspecified number of rows), the cell being the unit where a row and column intersect.
+
+6. String, Integer, Float
+
+7. Select the date and the amount from the all the payments.
+   Select the amounts over $500 from all the payments.
+   Select all the payments where the payee is "Mega Foods".
+
+8.
+
+SELECT email, signup
+FROM users
+WHERE name = "DeAndre Data:; 
+
+SELECT userid
+FROM USERS
+WHERE email = "aleesia.algorithm.uv.edu";
+
+SELECT * 
+FROM users
+WHERE userid = 4;
