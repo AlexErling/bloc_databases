@@ -1,0 +1,87 @@
+1. Adding: INSERT INTO * VALUES ();
+  Updating: UPDATE * SET ___ WHERE ___;
+  Deleting: DELETE FROM * WHERE ______;
+
+2. The basic structure is you list the command you want to from (INSERT INTO, UPDATE, DELETE FROM), then you list what table to perform the command in, then you specify how you want the data selected using WHERE.
+
+3. Data types that can be used are date (to set a date), text (to list the names of things), integers (to list whole numbers), and money (self explanatory).
+
+4.
+First and last name - Text
+Whether they sent in their RSVP - Boolean (Bit)
+Number of guests. - Integer
+Number of meals - NUMERIC(2, 1)
+
+Commands:
+
+CREATE TABLE wedding (
+ full_name: text,
+ rsvp: bit SET DEFAULT 0,
+ num_guests: integer,
+ num_meals: numeric(1, 1)
+);
+
+ALTER TABLE wedding ADD COLUMN thankyou bit SET DEFAULT 0;
+
+ALTER TABLE wedding DROP COLUMN num_meals;
+
+ALTER TABLE wedding ADD COLUMN table_num integer;
+
+DROP TABLE wedding;
+
+5.
+CREATE TABLE library (
+ISBN: integer,
+title: text,
+author: text,
+genre: text,
+publishing_date: date,
+num_copies: integer
+available_copies: integer,
+);
+
+INSERT INTO library VALUES (11111111, "Fake Book One", "Fake Author", "Fake Scary", 2012-01-18, 4, 4);
+INSERT INTO library VALUES (112222211, "Fake Book Two", "Fake Author", "Fake Scary", 2015-05-18, 7, 7);
+INSERT INTO library VALUES (1144441, "Fake Book Three", "Fake Author", "Fake Scary", 2019-03-13, 9, 9);
+
+UPDATE library SET available_copies = 8 WHERE ISBN = 1144441;
+
+DELETE FROM library WHERE ISBN = 11111111;
+
+6. CREATE TABLE spacecrafts(
+id = integer,
+name = text,
+year_launched = integer,
+country_origin = text
+description = text SET DEFAULT 'None',
+currently_operating = bit,
+distance_from_earth = integer
+);
+
+INSERT INTO spacecrafts VALUES (1, "Sat 1", 1999, 'USA', 'Cool Spacecraft', 1, 1000000000);
+
+INSERT INTO spacecrafts VALUES (2, "Sat 2", 1999, 'USA', 'Cool Spacecraft', 1, 1000000000);
+
+INSERT INTO spacecrafts VALUES (2, "Sat 3", 1999, 'USA', 'Cool Spacecraft', 1, 1000000000);
+
+UPDATE spacecrafts SET currently_operating = 0, WHERE id = 3;
+
+7. CREATE TABLE emails (
+id = integer,
+subject = text,
+sender = text,
+recipients = text,
+body = text,
+read = bit,
+id_chain = integer,
+timestamp = timestamp
+);
+
+INSERT INTO emails VALUES (1, "Hello", "Alex Erling", "Bloc", "This is my message", 0, 1);
+INSERT INTO emails VALUES (2, "Hello", "Alex Erling", "Bloc", "This is my message back", 0, 1);
+INSERT INTO emails VALUES (3, "Hello", "Alex Erling", "Bloc", "This is a new message message", 0, 2);
+
+
+DELETE FROM emails WHERE id = 1;
+
+UPDATE emails SET read = 0 where id = 2;
