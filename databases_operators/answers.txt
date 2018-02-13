@@ -1,0 +1,41 @@
+1. SELECT * FROM ___ WHERE ___;
+
+2. No mnemonic needed.
+
+3.
+
+SELECT name, gender, age FROM dogs WHERE breed LIKE '%labrador';
+SELECT id FROM dogs WHERE age < 1;
+SELECT name, age FROM dogs WHERE gender = 'F' AND weight > 35;
+SELECT * FROM dogs WHERE breed NOT LIKE '%shepherd';
+SELECT id, weight, age, breed FROM dogs WHERE weight > 60 or breed LIKE '%great dane';
+
+4.
+
+Query 1 -
+Everything under name, and adoption date
+
+Query 2 -
+Everything up name and age.
+
+5.
+SELECT * FROM cats where adoption_date IS NULL;
+SELECT * FROM cats where name = 'Seashell' OR name = 'Nala';
+SELECT names from cats;
+
+6.
+
+< : Less than - Finding something under a certain cost
+> : Greater Than - Finding someone over a certain weight
+<= : Less than or Equal - Finding someone at a certain height or lower
+>= : Greater Than or Equal - Finding something who has a certain dollar amount of higher
+!=, <> : Does Not Equal - Finding something who doesn't have a certain thing
+= : Equal - Finding someone who does have a certain thing.
+
+7.
+
+Query 1: Seashell, Nala
+
+Query 2: Mushi, Seashell, Victorie, Nala
+
+Query 3: 00003, 00004
