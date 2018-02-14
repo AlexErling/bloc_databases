@@ -1,0 +1,107 @@
+1.
+
+sum - sums all of the data in a column - could be used to add up total expenses
+
+avg - takes an average of the values in a column - can be useful for finding the mean of the data
+
+count - counts the number of values in specified column, useful to find number of teachers you have
+
+group by - organizes the data into groups, such as what subject the teachers are teaching
+
+limit - limits the amount of results returned back
+
+
+
+2.
+
+answers:
+$993
+
+sum  |   donor
+-----+------------
+ 71 | Daenerys
+ 33 | Sansa
+ 90 | Missandei
+120 | Margaery
+ 20 | Bronn
+ 20 | Theon
+ 60 | Arya
+ 25 | Jon
+  7 | Gilly
+ 30 | Ygritte
+ 50 | Tormund
+ 25 | Bran
+ 45 | Melisandre
+ 70 | Petyr
+120 | Tyrion
+ 75 | Brienne
+102 | ﻿Daenerys
+ 10 | Daario
+ 20 | Samwell
+
+ donation avg
+---------------------
+36.77
+
+max donation
+-----
+120
+
+
+min donation
+-----
+  5
+
+
+count (donations over 100)
+-------
+  2
+
+
+
+3. I would determine the display order by looking at the data, and then determining whether it was ordered by asc (the default) or desc order.
+
+4. You can use it when you are finding very specific data. For example say you own a store where you sell 20 items and you want to know the 5 most expensive. You can order the items in a list, offset the first 15 you aren't interested in and put a limit to show the other 5.
+
+5. It is important to use ORDER BY so you can organize your data, so you can actually effectively use the LIMIT to the data you want to see.
+
+6. While the WHERE clause filters individual rows by a given condition, the  HAVING clause eliminates entire groups of results with a single comparison. WHERE filters rows before aggregation (GROUP BY); HAVING filters groups after aggregations are performed.
+
+
+7. SELECT id, SUM (amount)
+FROM payment
+WHERE SUM (amount) > 200;
+
+
+8.
+
+Platinum Donors
+sum |   donor
+-----+------------
+173 | Daenerys
+120 | Tyrion
+120 | Margaery
+ 90 | Missandei
+ 75 | Brienne
+
+ Gold Donors
+ sum |   donor
+ -----+------------
+ 70 | Petyr
+ 60 | Arya
+ 50 | Tormund
+ 45 | Melisandre
+ 33 | Sansa
+ 30 | Ygritte
+ 25 | Jon
+ 25 | Bran
+ 20 | Theon
+ 20 | Bronn
+
+ Cats up for adoptiopnn
+ Mushi, Seashell, Azul, Victorie, Nala
+
+ Female cats two years or older:
+ Seashell
+
+ Could not find the adoption table, but I've done everything else asked.
