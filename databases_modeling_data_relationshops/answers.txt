@@ -1,0 +1,82 @@
+Question 1:
+Tables shown here:
+
+Bookings:
+guestid | room_number | check_in_date | check_out_date
+---------+-------------+---------------+----------------
+      1 |         101 | 2018-02-21    | 2018-02-28
+      1 |         201 | 2018-02-21    | 2018-02-28
+      2 |         301 | 2018-02-21    | 2018-02-28
+      2 |         301 | 2018-03-31    | 2018-03-28
+      4 |         101 | 2018-03-01    | 2018-03-05
+(5 rows)
+
+Guests:
+guestid | first_name | last_name |   phone    |          email          |    address
+---------+------------+-----------+------------+-------------------------+---------------
+      1 | Alex       | Erling    | 7023766787 | alex.erling@gmail.com   | 1741 Spyglass
+      2 | Taylor     | Erling    | 702111111  | taylor.erling@gmail.com | DC
+      3 | Marcus     | Erling    | 70254541   | marcus.erling@gmail.com | Reno
+      4 | Susan      | Erling    | 70254541   | susan.erling@gmail.com  | Reno
+
+Rooms:
+room_number | price_per_night
+-------------+-----------------
+        101 |             100
+        201 |             100
+        301 |             100
+        401 |             100
+
+
+SELECT guests.first_name, guests.last_name,  guests.guestid                                                                                                                                                                                                            FROM guests                                                                                                                                                                                                                                                                    LEFT JOIN bookings                                                                                                                                                                                                                                                             on guests.guestid = bookings.guestid                                                                                                                                                                                                                                           WHERE bookings.guestid IS NULL;
+ first_name | last_name | guestid
+------------+-----------+---------
+ Marcus     | Erling    |       3
+
+Select guests.first_name, guests.last_name, guests.guestid, bookings.check_in_date, bookings.check_out_date, bookings.room_number                                                                                                                                      FROM guests                                                                                                                                                                                                                                                                    INNER JOIN bookings                                                                                                                                                                                                                                                            on guests.guestid = bookings.guestid                                                                                                                                                                                                                                           WHERE guests.guestid = 1                                                                                                                                                                                                                                                       ;
+ first_name | last_name | guestid | check_in_date | check_out_date | room_number
+------------+-----------+---------+---------------+----------------+-------------
+ Alex       | Erling    |       1 | 2018-02-21    | 2018-02-28     |         101
+ Alex       | Erling    |       1 | 2018-02-21    | 2018-02-28     |         201
+
+Select guests.first_name, guests.last_name, guests.guestid, bookings.check_in_date, bookings.check_out_date, bookings.room_number
+ FROM guests                                                                                                                                                                                                                                                                    INNER JOIN bookings                                                                                                                                                                                                                                                            on guests.guestid = bookings.guestid                                                                                                                                                                                                                                           WHERE guests.guestid = 2                                                                                                                                                                                                                                                       ;
+ first_name | last_name | guestid | check_in_date | check_out_date | room_number
+------------+-----------+---------+---------------+----------------+-------------
+ Taylor     | Erling    |       2 | 2018-02-21    | 2018-02-28     |         301
+ Taylor     | Erling    |       2 | 2018-03-31    | 2018-03-28     |         301
+(2 rows)
+
+hotel=# SELECT COUNT(DISTINCT guestid)
+hotel-# FROM bookings
+hotel-# WHERE room_number = 101;
+ count
+-------
+     2
+(1 row)
+
+
+Question 2 & 3.
+(See attached picture for Question 2.)
+
+Queries:
+
+SELECT students.first_name, students.last_name
+FROM students
+INNER JOIN grade
+on students.id = grade.student_id
+WHERE grade.class_id = 1;
+
+SELECT count(grade.grade)
+WHERE class.id = 1,
+GROUPBY grade.grade;
+
+SELECT class.class_name, count(grade.student_id)
+FROM grade
+INNER JOIN grade
+ON class.id = grade.class_id
+GROUPBY class.class_name;
+
+
+SELECT count(grade.class_id);
+(*highest one is the max*)
