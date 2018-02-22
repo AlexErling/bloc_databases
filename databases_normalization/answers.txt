@@ -1,0 +1,62 @@
+1. Normalization is used to eliminate redundant or useless data, reduce the complexity of the data, and ensure that the data is logically stored. An example of where normalization can be important for an academic institution, where they are dealing with large amounts of data such as students, professors, classes, grades and it would be important to make thing works efficiently and normalized.
+2.
+First normal form is that data can't be repeated in groups.
+So if you one table and you have an employee that works in two departments (one value), you would need to separate into two tables (one for employer #, employee name) and then department table (employee # and department) so you don't have a cell with two pieces of data.
+
+Second normal form is that there shouldn't be any partial dependencies and all non-key attributes are full functional dependent of primary key.
+So If you have a table with employee #, department #, employee name, department you could separate that into two tables one for (employee #, department #, and employee name) and (department # and department).
+
+Third normal formal
+There is no transitive functional dependency.
+If you have table with (employee #, salary slip #, employee, salary) you can break down to (employee #, salary slip #, employee name) and salary slip # and salary.
+
+Boyce Codd Normal form
+A higher version of normal form which doesn't allow dependencies between attributes that belongs to candidate keys.
+Ex.
+Address-> {City,Street,Zip}
+
+Key 1-> {City,Zip}
+
+Key 2->{City,Street}
+
+No non key attribute hence this example is of 3 NF.
+
+{City,Street}->{zip}
+
+{Zip}->{City}
+
+There is dependency between attributes belonging to key.Hence this is BCNF.
+
+They are related because the higher forms have to include the lower forms as well. Second normal form includes first normal form.
+
+3.
+
+Table in 1NF
+Entry id | student id | professor id | subject | grade | professor_name student_email student_name
+
+I would break down into multiple tables:
+
+student_id | student_name | student_email
+
+professor_id | professor_name
+
+professor_id | subject
+
+entry_id | student id | professor id | grade
+
+
+4. The potential disadvantages of normalizing the data is that it becomes significantly more difficult to query making the queries significantly more complex.
+
+5.
+
+You could use one of these techniques:
+Adding redundant groups
+Adding derived columns
+Combining tables
+Repeating groups
+Creating extract tables
+Partitioning relations
+
+You would carry out denormalization if you were going to be writing complex queries for the database.
+
+6. The trade-offs are that in data normalization you can remove redundant information, reduce complexity and give the data more integrity and more efficient, but you lose the ability to write easier queries. On the other end you can write easier queries, but the data has less integrity and will be more confusing.
