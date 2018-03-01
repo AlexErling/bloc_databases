@@ -1,0 +1,158 @@
+1, Subqueries are when there are queries within in another query, and they are useful because it can allow people to ask even more complex questions when performing queries on databases.
+2. Subqueries can be found inside Where, From, and Select clauses. They can also be used inside insert, update, and delete statements as well. Essentially anywhere where an expression is allowed.
+3. There are numerous reasons to employ a subquery. Ultimately it allows you to query more complex questions regarding your databases, which allows a person to better utilize the information.
+4. A row constructor allows you to construct a pre-defined row. It builds out the row with the values, and that can be used in subqueries.
+5. You will get a NULL value, if there are no failures but at least one right-hand row yields NULL. So the whole result will return Null.
+6, The ways you can do a subquery include exists, not exists, in, not in, all, any, and some.
+
+
+7.
+
+SELECT * FROM shifts cross JOIN employees
+
+SELECT shifts.shifts, employees.employees
+FROM employees
+WHERE shifts.shifts IN
+    (Select shifts.shift From shifts);
+
+SELECT shifts.shifts, employee.employees
+FROM shifts, employees
+
+
+
+8.
+
+SELECT volunteer.name, dogs.name
+  FROM volunteers, dogs
+  WHERE foster_id = dogs.id
+
+  SELECT adopter.first_name, adopter.list_name, dogs.name
+    FROM adopter
+    WHERE adopters.comlumn_id IN
+      (SELECT adoptions.adopter
+       WHERE adoptions.date >= dateadd(mm, -1,  getdate()) );
+
+
+ SELECT adopters.first_name, adopters.last_name
+ FROM adopters
+ WHERE NOT EXISTS (
+ SELECT adoptions.id
+  From adoptions
+ );
+
+ SELECT dogs.name, cats.name
+ FROM dogs, cats
+ WHERE NOT EXISTS
+ (SELECT dogs.in_foster
+ FROM dogs)
+ OR
+ WHERE NOT EXISTS
+ (SELECT cats.adoption_date
+ FROM cats)
+
+
+ SELECT volunteers.name, dog.name
+ FROM volunteers
+ FULL OUTER JOIN dogs
+ on volunteers.foster_id = dogs.id
+ WHERE volunteers.available_to_foster = "yes" OR WHERE dogs.in_foster IS NULL
+
+9.
+
+SELECT adopters.first_name, adopters.last_name
+FROM adopters
+WHERE adopters.cat IN
+  (SELECT cats.name
+  FROM cats WHERE cats.name = "Seashell");
+
+
+10.
+
+Given the tables Books (isbn, title, author),
+Transactions(id, checked_out_date, checked_in_date, user_id, isbn),
+Holds(id, isbn, user_id, rank, date)
+Patrons(id, name, fine_amount)
+
+To discern if the library should buy more copies of a given book, please provide the names and position, in order, of all of the patrons waiting in line for Harry Potter and the Sorcerer’s Stone.
+
+
+
+SELECT patrons.name, holds.rank
+FROM holds
+WHERE holds.user_id IN
+(SELECT patrons.id
+From patrons)
+WHERE holds.ibsn IN
+(SELECT books.isbn
+FROM books
+WHERE book.title = "Harry Potter and the Sorcerer's Stone")
+Order by holds.rank;
+
+Make a list of all book titles and denote whether or not a copy of that book is checked out.
+
+
+
+
+SELECT books.title, CASE WHEN transactions.checked_in_date IS NULL then 'Checked out' ELSE 'Checked In' End
+FROM books
+WHERE books.isbn IN
+( SELECT * transactions.isbn
+FROM transactions);
+
+
+In an effort to learn which books take longer to read, the librarians would like you to create a list of total checked out time by book name in the past month.
+
+SELECT books.title, DATEDIFF(HOUR, checked_in_date, checked_out_date)
+FROM transactions
+
+WHERE books.isbn IN
+(SELECT transactions.isbn FROM transactions)
+WHERE checked_out_date >=  dateadd(mm, -1,  getdate())
+GROUPBY books.title
+
+
+In order to learn which items should be retired, make a list of all books that have not been checked out in the past 5 years.
+
+SELECT books.title
+FROM books
+WHERE books.isbn IN
+(SELECT transactions.isbn FROM transactions WHERE checked_out_date > YEAR(CURRENT_TIMESTAMP) - 5);
+
+
+List all of the library patrons. If they have one or more books checked out, correspond the books to the patrons.
+
+SELECT patrons.name, book.isbn
+FROM transactions
+WHERE transactions.user_id IN
+  (SELECT patrons.id
+  From patrons)
+WHERE transactions.isbn IN
+  (SELECT books.isbn FROM books);
+
+11.
+
+To determine the most profitable airplanes, find all airplane models where each flight has had over 100 paying customers in the past month.
+To determine the most profitable flights, find all destination-origin pairs where 90% or more of the seats have been sold in the past month.
+The airline is looking to expand its presence in the US Southeast and globally. Find the total revenue of any flight arriving at or departing from Atlanta.
+
+Select flights.airplane_model UNIQUE
+FROM flights
+WHERE flight_number ALL
+(SELECT transactions.flight_number from transactions WHERE seats_sold > 100 WHERE date >=  dateadd(mm, -1,  getdate()));
+
+SELECT flights.destination, flights.origin
+FROM flights
+WHERE flight_number IN
+(SELECT transactions.flight_number from transactions WHERE date >=  dateadd(mm, -1,  getdate()))
+WHERE flight.airplane_model IN
+(SELECT airplanes.model FROM airplanes)
+WHERE (seats_sold / seat_capacity) >= .90;
+
+SELECT transactions.total_revenue
+FROM transactions
+WHERE destination = "Atlanta" OR origin = "Atlanta")
+WHERE transactions.flight_number IN
+(SELECT flight_number from flights WHERE destination = "Atlanta" OR origin = "Atlanta"))
+
+
+12. In my opinion, I think the joins are easier to write, but the subqueries are easier to read. The subqueries are a lot more logical.
